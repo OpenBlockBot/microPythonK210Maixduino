@@ -1,0 +1,64 @@
+{
+  "name": "micropython-k210-maixduino",
+  "version": "1.0.0",
+  "author": "ArthurZheng",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openblock-plugin/microPythonK210Maixduino.git"
+  },
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "dev": "npx openblock-registry-cli dev",
+    "build": "npx openblock-registry-cli build",
+    "build:obfuscate": "npx openblock-registry-cli build --obfuscate",
+    "publish": "npx openblock-registry-cli publish",
+    "publish:dry": "npx openblock-registry-cli publish --dry-run",
+    "validate": "npx openblock-registry-cli validate",
+    "i18n:update": "npx openblock-registry-cli i18n update",
+    "lint": "eslint . --ext .js --fix"
+  },
+  "openblock": {
+    "name": "K210 Maixduino",
+    "deviceId": "microPythonK210Maixduino",
+    "manufactor": "kendryte",
+    "learnMore": "https://wiki.sipeed.com/hardware/en/maix/maixduino/maixduino.html",
+    "type": "microPython",
+    "iconURL": "./assets/microPythonK210Maixduino.png",
+    "description": {
+      "formatMessage": {
+        "id": "microPythonK210Maixduino.description",
+        "default": "An Arduino-form K210 RISC-V AI development board with onboard Wi-Fi."
+      }
+    },
+    "bluetoothRequired": false,
+    "serialportRequired": true,
+    "defaultBaudRate": "115200",
+    "internetConnectionRequired": false,
+    "launchPeripheralConnectionFlow": true,
+    "useAutoScan": false,
+    "connectionIconURL": "./assets/microPythonK210Maixduino-illustration.svg",
+    "connectionSmallIconURL": "./assets/microPythonK210Maixduino-small.svg",
+    "main": "./src/microPythonK210Maixduino.js",
+    "generator": "./src/generator.js",
+    "translations": "./src/translations.js",
+    "programMode": ["upload"],
+    "tags": ["microPython"],
+    "helpLink": "https://wiki.openblock.cc/general-hardware-guidelines/boards/k210-maixduino",
+    "libraries": "./libraries",
+    "firmwares": [
+      {
+        "id": "standard",
+        "name": "MaixPy OpenMV",
+        "file": "./firmwares/maixpy-openmv-k210.bin"
+      }
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.3.0",
+    "eslint-config-scratch": "^5.0.0",
+    "husky": "^9.0.0"
+  }
+}

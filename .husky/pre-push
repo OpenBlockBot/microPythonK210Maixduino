@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Read stdin to check what refs are being pushed
+# Git pre-push hook receives: <local ref> <local sha> <remote ref> <remote sha>
+while read local_ref local_sha remote_ref remote_sha
+do
+    # Check if pushing a tag
+    if echo "$local_ref" | grep -q "^refs/tags/"; then
+        tag_name=$(echo "$local_ref" | sed 's|refs/tags/||')
+        echo "Pushing tag: $tag_name"
+
+        # Run validate and verify-tag only when pushing tags
+        npx openblock-registry-cli validate --skip-tag
+        npx openblock-registry-cli verify-tag "$tag_name"
+        exit $?
+    fi
+done
+
+# Not pushing a tag, allow the push
+exit 0
