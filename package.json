@@ -1,6 +1,6 @@
 {
   "name": "micropython-k210-maixduino",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": "ArthurZheng",
   "license": "MIT",
   "repository": {
@@ -22,6 +22,9 @@
   "openblock": {
     "name": "K210 Maixduino",
     "deviceId": "microPythonK210Maixduino",
+    "arch": [
+      "microPython-k210-w"
+    ],
     "manufactor": "kendryte",
     "learnMore": "https://wiki.sipeed.com/hardware/en/maix/maixduino/maixduino.html",
     "type": "microPython",
@@ -43,15 +46,115 @@
     "main": "./src/microPythonK210Maixduino.js",
     "generator": "./src/generator.js",
     "translations": "./src/translations.js",
-    "programMode": ["upload"],
-    "tags": ["microPython"],
+    "programMode": [
+      "upload"
+    ],
+    "tags": [
+      "microPython"
+    ],
     "helpLink": "https://wiki.openblock.cc/general-hardware-guidelines/boards/k210-maixduino",
-    "libraries": "./libraries",
     "firmwares": [
       {
         "id": "standard",
-        "name": "MaixPy OpenMV",
-        "file": "./firmwares/maixpy-openmv-k210.bin"
+        "name": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.firmware.standard",
+            "default": "MaixPy Standard (kmodel V4)"
+          }
+        },
+        "file": "./firmwares/maixpy_v0.6.3_2_gd8901fd22.bin"
+      },
+      {
+        "id": "lvgl",
+        "name": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.firmware.lvgl",
+            "default": "MaixPy with LVGL (kmodel V3)"
+          }
+        },
+        "file": "./firmwares/maixpy_v0.6.3_2_gd8901fd22_with_lvgl.bin"
+      }
+    ],
+    "examples": [
+      {
+        "id": "blink",
+        "name": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.blink.name",
+            "default": "Blink"
+          }
+        },
+        "description": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.blink.description",
+            "default": "Make the on-board LED blink."
+          }
+        },
+        "file": "./examples/blink.ob"
+      },
+      {
+        "id": "button",
+        "name": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.button.name",
+            "default": "Button"
+          }
+        },
+        "description": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.button.description",
+            "default": "Light up the LED while a push button is pressed."
+          }
+        },
+        "file": "./examples/button.ob"
+      },
+      {
+        "id": "fade",
+        "name": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.fade.name",
+            "default": "Fade"
+          }
+        },
+        "description": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.fade.description",
+            "default": "Smoothly fade an LED in and out using PWM."
+          }
+        },
+        "file": "./examples/fade.ob"
+      },
+      {
+        "id": "servoSweep",
+        "name": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.servoSweep.name",
+            "default": "Servo Sweep"
+          }
+        },
+        "description": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.servoSweep.description",
+            "default": "Sweep a servo back and forth between 0 and 180 degrees."
+          }
+        },
+        "file": "./examples/servoSweep.ob"
+      },
+      {
+        "id": "consolePrint",
+        "name": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.consolePrint.name",
+            "default": "Console Print"
+          }
+        },
+        "description": {
+          "formatMessage": {
+            "id": "microPythonK210Maixduino.examples.consolePrint.description",
+            "default": "Print messages to the terminal."
+          }
+        },
+        "file": "./examples/consolePrint.ob"
       }
     ]
   },

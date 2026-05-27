@@ -1,4 +1,4 @@
-const { formatMessage, ArgumentType, BlockType, ProgramModeType, CommonPeripheral } = window.Scratch;
+const {formatMessage, ArgumentType, BlockType, ProgramModeType, CommonPeripheral} = window.Scratch;
 
 const PNPID_LIST = [
     // FTDI
@@ -13,11 +13,10 @@ const SERIAL_CONFIG = {
 
 const DIVECE_OPT = {
     type: 'microPython',
-    chip: 'k210',
+    fqbn: 'k210:k210',
     baud: '1500000',
     board: 'maixduino',
-    slowMode: true,
-    firmware: 'maixpy-openmv-k210.bin'
+    slowMode: true
 };
 
 const Pins = {
@@ -52,8 +51,18 @@ const Level = {
 };
 
 const Channels = {
-    CH0: '0', CH1: '1', CH2: '2', CH3: '3', CH4: '4', CH5: '5',
-    CH6: '6', CH7: '7', CH8: '8', CH9: '9', CH10: '10', CH11: '11'
+    CH0: '0',
+    CH1: '1',
+    CH2: '2',
+    CH3: '3',
+    CH4: '4',
+    CH5: '5',
+    CH6: '6',
+    CH7: '7',
+    CH8: '8',
+    CH9: '9',
+    CH10: '10',
+    CH11: '11'
 };
 
 const SerialNo = {
@@ -103,21 +112,74 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
 
     get PINS_MENU () {
         return [
-            { text: '2', value: Pins.D2 },
-            { text: '3', value: Pins.D3 },
-            { text: '4', value: Pins.D4 },
-            { text: '5', value: Pins.D5 },
-            { text: '6', value: Pins.D6 },
-            { text: '7', value: Pins.D7 },
-            { text: '8', value: Pins.D8 },
-            { text: '9', value: Pins.D9 },
-            { text: '10', value: Pins.D10 },
-            { text: '11', value: Pins.D11 },
-            { text: '12', value: Pins.D12 },
-            { text: '13', value: Pins.D13 },
-            { text: 'SDA', value: Pins.SDA },
-            { text: 'SCL', value: Pins.SCL },
-            { text: 'BOOT', value: Pins.BOOT }
+            {
+                text: '0',
+                value: Pins.D0
+            },
+            {
+                text: '1',
+                value: Pins.D1
+            },
+            {
+                text: '2',
+                value: Pins.D2
+            },
+            {
+                text: '3',
+                value: Pins.D3
+            },
+            {
+                text: '4',
+                value: Pins.D4
+            },
+            {
+                text: '5',
+                value: Pins.D5
+            },
+            {
+                text: '6',
+                value: Pins.D6
+            },
+            {
+                text: '7',
+                value: Pins.D7
+            },
+            {
+                text: '8',
+                value: Pins.D8
+            },
+            {
+                text: '9',
+                value: Pins.D9
+            },
+            {
+                text: '10',
+                value: Pins.D10
+            },
+            {
+                text: '11',
+                value: Pins.D11
+            },
+            {
+                text: '12',
+                value: Pins.D12
+            },
+            {
+                text: '13',
+                value: Pins.D13
+            },
+            {
+                text: 'SDA',
+                value: Pins.SDA
+            },
+            {
+                text: 'SCL',
+                value: Pins.SCL
+            },
+            {
+                text: 'BOOT',
+                value: Pins.BOOT
+            }
         ];
     }
 
@@ -185,18 +247,54 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
 
     get TIMER_CHANNELS_MENU () {
         return [
-            { text: 'CH0 (T0)', value: Channels.CH0 },
-            { text: 'CH1 (T0)', value: Channels.CH1 },
-            { text: 'CH2 (T0)', value: Channels.CH2 },
-            { text: 'CH3 (T0)', value: Channels.CH3 },
-            { text: 'CH4 (T1)', value: Channels.CH4 },
-            { text: 'CH5 (T1)', value: Channels.CH5 },
-            { text: 'CH6 (T1)', value: Channels.CH6 },
-            { text: 'CH7 (T1)', value: Channels.CH7 },
-            { text: 'CH8 (T2)', value: Channels.CH8 },
-            { text: 'CH9 (T2)', value: Channels.CH9 },
-            { text: 'CH10 (T2)', value: Channels.CH10 },
-            { text: 'CH11 (T2)', value: Channels.CH11 }
+            {
+                text: 'CH0 (T0)',
+                value: Channels.CH0
+            },
+            {
+                text: 'CH1 (T0)',
+                value: Channels.CH1
+            },
+            {
+                text: 'CH2 (T0)',
+                value: Channels.CH2
+            },
+            {
+                text: 'CH3 (T0)',
+                value: Channels.CH3
+            },
+            {
+                text: 'CH4 (T1)',
+                value: Channels.CH4
+            },
+            {
+                text: 'CH5 (T1)',
+                value: Channels.CH5
+            },
+            {
+                text: 'CH6 (T1)',
+                value: Channels.CH6
+            },
+            {
+                text: 'CH7 (T1)',
+                value: Channels.CH7
+            },
+            {
+                text: 'CH8 (T2)',
+                value: Channels.CH8
+            },
+            {
+                text: 'CH9 (T2)',
+                value: Channels.CH9
+            },
+            {
+                text: 'CH10 (T2)',
+                value: Channels.CH10
+            },
+            {
+                text: 'CH11 (T2)',
+                value: Channels.CH11
+            }
         ];
     }
 
@@ -231,9 +329,18 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
 
     get SERIAL_NO_MENU () {
         return [
-            { text: '1', value: SerialNo.Serial1 },
-            { text: '2', value: SerialNo.Serial2 },
-            { text: '3', value: SerialNo.Serial3 }
+            {
+                text: '1',
+                value: SerialNo.Serial1
+            },
+            {
+                text: '2',
+                value: SerialNo.Serial2
+            },
+            {
+                text: '3',
+                value: SerialNo.Serial3
+            }
         ];
     }
 
@@ -247,13 +354,34 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
 
     get BAUDTATE_MENU () {
         return [
-            { text: '4800', value: Buadrate.B4800 },
-            { text: '9600', value: Buadrate.B9600 },
-            { text: '19200', value: Buadrate.B19200 },
-            { text: '38400', value: Buadrate.B38400 },
-            { text: '57600', value: Buadrate.B57600 },
-            { text: '76800', value: Buadrate.B76800 },
-            { text: '115200', value: Buadrate.B115200 }
+            {
+                text: '4800',
+                value: Buadrate.B4800
+            },
+            {
+                text: '9600',
+                value: Buadrate.B9600
+            },
+            {
+                text: '19200',
+                value: Buadrate.B19200
+            },
+            {
+                text: '38400',
+                value: Buadrate.B38400
+            },
+            {
+                text: '57600',
+                value: Buadrate.B57600
+            },
+            {
+                text: '76800',
+                value: Buadrate.B76800
+            },
+            {
+                text: '115200',
+                value: Buadrate.B115200
+            }
         ];
     }
 
@@ -298,16 +426,24 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
 
                 blocks: [
                     {
-                        opcode: 'k210SetPinMode',
+                        opcode: 'setPinMode',
                         text: formatMessage({
-                            id: 'microPythonK210Maixduino.pins.k210SetPinMode',
+                            id: 'microPythonK210Maixduino.pins.setPinMode',
                             default: 'set pin [PIN] mode [MODE]',
                             description: 'MicroPython K210 set pin mode'
                         }),
                         blockType: BlockType.COMMAND,
                         arguments: {
-                            PIN: { type: ArgumentType.STRING, menu: 'pins', defaultValue: this.DEFAULT_PIN },
-                            MODE: { type: ArgumentType.STRING, menu: 'mode', defaultValue: Mode.Input }
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            MODE: {
+                                type: ArgumentType.STRING,
+                                menu: 'mode',
+                                defaultValue: Mode.Input
+                            }
                         }
                     },
                     {
@@ -319,22 +455,41 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
                         }),
                         blockType: BlockType.COMMAND,
                         arguments: {
-                            PIN: { type: ArgumentType.STRING, menu: 'pins', defaultValue: this.DEFAULT_PIN },
-                            LEVEL: { type: ArgumentType.STRING, menu: 'level', defaultValue: Level.High }
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            LEVEL: {
+                                type: ArgumentType.STRING,
+                                menu: 'level',
+                                defaultValue: Level.High
+                            }
                         }
                     },
                     {
-                        opcode: 'k210SetPwmOutput',
+                        opcode: 'setPwmOutput',
                         text: formatMessage({
-                            id: 'microPythonK210Maixduino.pins.k210SetPwmOutput',
+                            id: 'microPythonK210Maixduino.pins.setPwmOutput',
                             default: 'set pwm pin [PIN] use channel [CH] out [OUT]',
                             description: 'MicroPython K210 set pwm pin out'
                         }),
                         blockType: BlockType.COMMAND,
                         arguments: {
-                            PIN: { type: ArgumentType.STRING, menu: 'pins', defaultValue: this.DEFAULT_PIN },
-                            OUT: { type: ArgumentType.INTOTO100_NUMBER, defaultValue: '0' },
-                            CH: { type: ArgumentType.NUMBER, menu: 'timerChannels', defaultValue: Channels.CH0 }
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            OUT: {
+                                type: ArgumentType.INTOTO100_NUMBER,
+                                defaultValue: '0'
+                            },
+                            CH: {
+                                type: ArgumentType.NUMBER,
+                                menu: 'timerChannels',
+                                defaultValue: Channels.CH0
+                            }
                         }
                     },
                     '---',
@@ -347,46 +502,182 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
                         }),
                         blockType: BlockType.BOOLEAN,
                         arguments: {
-                            PIN: { type: ArgumentType.STRING, menu: 'pins', defaultValue: this.DEFAULT_PIN }
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            }
                         }
                     },
                     '---',
                     {
-                        opcode: 'k210SetServoOutput',
+                        opcode: 'setServoOutput',
                         text: formatMessage({
-                            id: 'microPythonK210Maixduino.pins.k210SetServoOutput',
+                            id: 'microPythonK210Maixduino.pins.setServoOutput',
                             default: 'set servo pin [PIN] use channel [CH] out [OUT]',
                             description: 'MicroPython K210 set servo pin out'
                         }),
                         blockType: BlockType.COMMAND,
                         arguments: {
-                            PIN: { type: ArgumentType.STRING, menu: 'pins', defaultValue: this.DEFAULT_PIN },
-                            OUT: { type: ArgumentType.HALF_ANGLE, defaultValue: '0' },
-                            CH: { type: ArgumentType.NUMBER, menu: 'timerChannels', defaultValue: Channels.CH0 }
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            OUT: {
+                                type: ArgumentType.HALF_ANGLE,
+                                defaultValue: '0'
+                            },
+                            CH: {
+                                type: ArgumentType.NUMBER,
+                                menu: 'timerChannels',
+                                defaultValue: Channels.CH0
+                            }
                         }
                     },
                     '---',
                     {
-                        opcode: 'k210AttachInterrupt',
+                        opcode: 'attachInterrupt',
                         text: formatMessage({
-                            id: 'microPythonK210Maixduino.pins.k210AttachInterrupt',
+                            id: 'microPythonK210Maixduino.pins.attachInterrupt',
                             default: 'attach interrupt pin [PIN] mode [MODE] executes',
                             description: 'MicroPython K210 attach interrupt'
                         }),
                         blockType: BlockType.CONDITIONAL,
                         arguments: {
-                            PIN: { type: ArgumentType.STRING, menu: 'pins', defaultValue: this.DEFAULT_PIN },
-                            MODE: { type: ArgumentType.STRING, menu: 'interruptMode', defaultValue: InterrupMode.Rising }
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            MODE: {
+                                type: ArgumentType.STRING,
+                                menu: 'interruptMode',
+                                defaultValue: InterrupMode.Rising
+                            }
                         },
                         programMode: [ProgramModeType.UPLOAD]
+                    },
+                    // Legacy aliases, kept for backward compatibility.
+                    {
+                        opcode: 'k210SetPinMode',
+                        text: formatMessage({
+                            id: 'microPythonK210Maixduino.pins.setPinMode',
+                            default: 'set pin [PIN] mode [MODE]',
+                            description: 'MicroPython K210 set pin mode'
+                        }),
+                        blockType: BlockType.COMMAND,
+                        arguments: {
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            MODE: {
+                                type: ArgumentType.STRING,
+                                menu: 'mode',
+                                defaultValue: Mode.Input
+                            }
+                        },
+                        hideFromPalette: true,
+                        func: 'setPinMode'
+                    },
+                    {
+                        opcode: 'k210SetPwmOutput',
+                        text: formatMessage({
+                            id: 'microPythonK210Maixduino.pins.setPwmOutput',
+                            default: 'set pwm pin [PIN] use channel [CH] out [OUT]',
+                            description: 'MicroPython K210 set pwm pin out'
+                        }),
+                        blockType: BlockType.COMMAND,
+                        arguments: {
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            OUT: {
+                                type: ArgumentType.INTOTO100_NUMBER,
+                                defaultValue: '0'
+                            },
+                            CH: {
+                                type: ArgumentType.NUMBER,
+                                menu: 'timerChannels',
+                                defaultValue: Channels.CH0
+                            }
+                        },
+                        hideFromPalette: true,
+                        func: 'setPwmOutput'
+                    },
+                    {
+                        opcode: 'k210SetServoOutput',
+                        text: formatMessage({
+                            id: 'microPythonK210Maixduino.pins.setServoOutput',
+                            default: 'set servo pin [PIN] use channel [CH] out [OUT]',
+                            description: 'MicroPython K210 set servo pin out'
+                        }),
+                        blockType: BlockType.COMMAND,
+                        arguments: {
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            OUT: {
+                                type: ArgumentType.HALF_ANGLE,
+                                defaultValue: '0'
+                            },
+                            CH: {
+                                type: ArgumentType.NUMBER,
+                                menu: 'timerChannels',
+                                defaultValue: Channels.CH0
+                            }
+                        },
+                        hideFromPalette: true,
+                        func: 'setServoOutput'
+                    },
+                    {
+                        opcode: 'k210AttachInterrupt',
+                        text: formatMessage({
+                            id: 'microPythonK210Maixduino.pins.attachInterrupt',
+                            default: 'attach interrupt pin [PIN] mode [MODE] executes',
+                            description: 'MicroPython K210 attach interrupt'
+                        }),
+                        blockType: BlockType.CONDITIONAL,
+                        arguments: {
+                            PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_PIN
+                            },
+                            MODE: {
+                                type: ArgumentType.STRING,
+                                menu: 'interruptMode',
+                                defaultValue: InterrupMode.Rising
+                            }
+                        },
+                        programMode: [ProgramModeType.UPLOAD],
+                        hideFromPalette: true,
+                        func: 'attachInterrupt'
                     }
                 ],
                 menus: {
-                    pins: { items: this.PINS_MENU },
-                    mode: { items: this.MODE_MENU },
-                    level: { acceptReporters: true, items: this.LEVEL_MENU },
-                    timerChannels: { items: this.TIMER_CHANNELS_MENU },
-                    interruptMode: { items: this.INTERRUP_MODE_MENU }
+                    pins: {
+                        items: this.PINS_MENU
+                    },
+                    mode: {
+                        items: this.MODE_MENU
+                    },
+                    level: {
+                        acceptReporters: true,
+                        items: this.LEVEL_MENU
+                    },
+                    timerChannels: {
+                        items: this.TIMER_CHANNELS_MENU
+                    },
+                    interruptMode: {
+                        items: this.INTERRUP_MODE_MENU
+                    }
                 }
             },
             {
@@ -402,18 +693,34 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
 
                 blocks: [
                     {
-                        opcode: 'k210SerialBegin',
+                        opcode: 'serialBegin',
                         text: formatMessage({
-                            id: 'microPythonK210Maixduino.serial.k210SerialBegin',
+                            id: 'microPythonK210Maixduino.serial.serialBegin',
                             default: 'serial [NO] begin baudrate [BAUD] pin RX [RX_PIN] TX [TX_PIN]',
                             description: 'MicroPython K210 multi serial begin'
                         }),
                         blockType: BlockType.COMMAND,
                         arguments: {
-                            NO: { type: ArgumentType.NUMBER, menu: 'serialNo', defaultValue: SerialNo.Serial1 },
-                            BAUD: { type: ArgumentType.STRING, menu: 'baudrate', defaultValue: Buadrate.B115200 },
-                            RX_PIN: { type: ArgumentType.STRING, menu: 'pins', defaultValue: this.DEFAULT_SERIAL_RX_PIN },
-                            TX_PIN: { type: ArgumentType.STRING, menu: 'pins', defaultValue: this.DEFAULT_SERIAL_TX_PIN }
+                            NO: {
+                                type: ArgumentType.NUMBER,
+                                menu: 'serialNo',
+                                defaultValue: SerialNo.Serial1
+                            },
+                            BAUD: {
+                                type: ArgumentType.STRING,
+                                menu: 'baudrate',
+                                defaultValue: Buadrate.B115200
+                            },
+                            RX_PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_SERIAL_RX_PIN
+                            },
+                            TX_PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_SERIAL_TX_PIN
+                            }
                         }
                     },
                     {
@@ -425,9 +732,20 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
                         }),
                         blockType: BlockType.COMMAND,
                         arguments: {
-                            NO: { type: ArgumentType.NUMBER, menu: 'serialNo', defaultValue: SerialNo.Serial1 },
-                            VALUE: { type: ArgumentType.STRING, defaultValue: 'Hello OpenBlock' },
-                            EOL: { type: ArgumentType.STRING, menu: 'eol', defaultValue: Eol.Warp }
+                            NO: {
+                                type: ArgumentType.NUMBER,
+                                menu: 'serialNo',
+                                defaultValue: SerialNo.Serial1
+                            },
+                            VALUE: {
+                                type: ArgumentType.STRING,
+                                defaultValue: 'Hello OpenBlock'
+                            },
+                            EOL: {
+                                type: ArgumentType.STRING,
+                                menu: 'eol',
+                                defaultValue: Eol.Warp
+                            }
                         }
                     },
                     {
@@ -438,16 +756,62 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
                             description: 'MicroPython K210 multi serial read a line'
                         }),
                         arguments: {
-                            NO: { type: ArgumentType.NUMBER, menu: 'serialNo', defaultValue: SerialNo.Serial1 }
+                            NO: {
+                                type: ArgumentType.NUMBER,
+                                menu: 'serialNo',
+                                defaultValue: SerialNo.Serial1
+                            }
                         },
                         blockType: BlockType.REPORTER
+                    },
+                    // Legacy aliases, kept for backward compatibility.
+                    {
+                        opcode: 'k210SerialBegin',
+                        text: formatMessage({
+                            id: 'microPythonK210Maixduino.serial.serialBegin',
+                            default: 'serial [NO] begin baudrate [BAUD] pin RX [RX_PIN] TX [TX_PIN]',
+                            description: 'MicroPython K210 multi serial begin'
+                        }),
+                        blockType: BlockType.COMMAND,
+                        arguments: {
+                            NO: {
+                                type: ArgumentType.NUMBER,
+                                menu: 'serialNo',
+                                defaultValue: SerialNo.Serial1
+                            },
+                            BAUD: {
+                                type: ArgumentType.STRING,
+                                menu: 'baudrate',
+                                defaultValue: Buadrate.B115200
+                            },
+                            RX_PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_SERIAL_RX_PIN
+                            },
+                            TX_PIN: {
+                                type: ArgumentType.STRING,
+                                menu: 'pins',
+                                defaultValue: this.DEFAULT_SERIAL_TX_PIN
+                            }
+                        },
+                        hideFromPalette: true,
+                        func: 'serialBegin'
                     }
                 ],
                 menus: {
-                    baudrate: { items: this.BAUDTATE_MENU },
-                    serialNo: { items: this.SERIAL_NO_MENU },
-                    pins: { items: this.PINS_MENU },
-                    eol: { items: this.EOL_MENU }
+                    baudrate: {
+                        items: this.BAUDTATE_MENU
+                    },
+                    serialNo: {
+                        items: this.SERIAL_NO_MENU
+                    },
+                    pins: {
+                        items: this.PINS_MENU
+                    },
+                    eol: {
+                        items: this.EOL_MENU
+                    }
                 }
             },
             {
@@ -471,8 +835,15 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
                         }),
                         blockType: BlockType.COMMAND,
                         arguments: {
-                            TEXT: { type: ArgumentType.STRING, defaultValue: 'Hello OpenBlock' },
-                            EOL: { type: ArgumentType.STRING, menu: 'eol', defaultValue: Eol.Warp }
+                            TEXT: {
+                                type: ArgumentType.STRING,
+                                defaultValue: 'Hello OpenBlock'
+                            },
+                            EOL: {
+                                type: ArgumentType.STRING,
+                                menu: 'eol',
+                                defaultValue: Eol.Warp
+                            }
                         },
                         programMode: [ProgramModeType.UPLOAD]
                     },
@@ -485,13 +856,18 @@ class OpenBlockMicroPythonK210MaixduinoDevice {
                         }),
                         blockType: BlockType.REPORTER,
                         arguments: {
-                            TEXT: { type: ArgumentType.STRING, defaultValue: 'Input a number:' }
+                            TEXT: {
+                                type: ArgumentType.STRING,
+                                defaultValue: 'Input a number:'
+                            }
                         },
                         programMode: [ProgramModeType.UPLOAD]
                     }
                 ],
                 menus: {
-                    eol: { items: this.EOL_MENU }
+                    eol: {
+                        items: this.EOL_MENU
+                    }
                 }
             }
         ];
