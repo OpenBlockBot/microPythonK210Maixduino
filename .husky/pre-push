@@ -4,15 +4,21 @@
 # Git pre-push hook receives: <local ref> <local sha> <remote ref> <remote sha>
 while read local_ref local_sha remote_ref remote_sha
 do
-    # Check if pushing a tag
+    # Only act when pushing a tag
     if echo "$local_ref" | grep -q "^refs/tags/"; then
         tag_name=$(echo "$local_ref" | sed 's|refs/tags/||')
         echo "Pushing tag: $tag_name"
 
-        # Run validate and verify-tag only when pushing tags
-        npx openblock-registry-cli validate --skip-tag
-        npx openblock-registry-cli verify-tag "$tag_name"
-        exit $?
+        # Blocking checks: plugin structure + tag/version match
+        npx openblock-registry-cli validate --skip-tag || exit 1
+        npx openblock-registry-cli verify-tag "$tag_name" || exit 1
+
+        # Non-blocking reminder: if the display channel (name/icon/description)
+        # changed vs the approved baseline, run "npm run publish" after this push
+        # to open a display-baseline review PR. Never blocks the push.
+        npx openblock-registry-cli check-display || true
+
+        exit 0
     fi
 done
 
